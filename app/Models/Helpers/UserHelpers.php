@@ -2,6 +2,7 @@
 
 namespace App\Models\Helpers;
 
+use App\Models\Audiogram;
 use Illuminate\Support\Arr;
 
 trait UserHelpers
@@ -67,5 +68,34 @@ trait UserHelpers
     public function isDefaultName(): bool
     {
         return $this->name === env('APP_NAME').' User';
+    }
+
+    /**
+     * Create or get audiogram values for specific ear type.
+     *
+     * @return \App\Models\Audiogram
+     */
+    public function createOrGetAudiogramForEar(string $type, array $data): Audiogram
+    {
+        return $this->audiograms()->firstOrCreate(
+            ['type' => $type],
+            ['type' => $type, 'freqs' => $data]
+        );
+    }
+
+    /**
+     * @return \App\Models\Audiogram
+     */
+    public function createOrGetAudiogramForRightEar(array $data): Audiogram
+    {
+        return $this->createOrGetAudiogramForEar(Audiogram::RIGHT, $data);
+    }
+
+    /**
+     * @return \App\Models\Audiogram
+     */
+    public function createOrGetAudiogramForLeftEar(array $data): Audiogram
+    {
+        return $this->createOrGetAudiogramForEar(Audiogram::LEFT, $data);
     }
 }

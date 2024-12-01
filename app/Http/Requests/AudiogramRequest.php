@@ -23,8 +23,8 @@ class AudiogramRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => ['required', 'in:left,right'],
-            'freqs' => ['required', 'array', new AudiogramFrequenciesRule()]
+            'right_ear' => ['required', 'array', new AudiogramFrequenciesRule()],
+            'left_ear' => ['required', 'array', new AudiogramFrequenciesRule()],
         ];
     }
 }

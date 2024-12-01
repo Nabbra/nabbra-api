@@ -25,15 +25,13 @@ class AudiogramController extends Controller
      */
     public function store(AudiogramRequest $request)
     {
-        if (auth()->user()->audiograms()->where('type', $request->input('type'))->exists()) {
-            throw ValidationException::withMessages([
-                'freqs' => ['The frequency already exists.'],
-            ]);
-        }
+        auth()->user()->createOrGetAudiogramForRightEar($request->input('right_ear'));
+        auth()->user()->createOrGetAudiogramForLeftEar($request->input('left_ear'));
 
-        $audiogram = auth()->user()->audiograms()->create($request->validated());
-
-        return new AudiogramResource($audiogram);
+        return response()->json([
+            'status' => true,
+            'message' => 'Success',
+        ]);
     }
 
     /**
