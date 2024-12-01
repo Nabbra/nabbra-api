@@ -2,10 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Helpers\AudiogramHelpers;
 use Illuminate\Database\Eloquent\Model;
 
 class Audiogram extends Model
 {
+    use AudiogramHelpers;
+
+    const LEFT = 'left';
+    const RIGHT = 'right';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,5 +31,17 @@ class Audiogram extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'freqs' => 'array',
+        ];
     }
 }

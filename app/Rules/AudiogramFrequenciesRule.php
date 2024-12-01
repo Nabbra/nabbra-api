@@ -14,6 +14,10 @@ class AudiogramFrequenciesRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        //
+        try {
+            // TODO: validate more on it.
+        } catch (\Exception $e) {
+            $fail('The :attribute is not valid frequencies list.');
+        }
     }
 }

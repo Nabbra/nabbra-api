@@ -29,11 +29,11 @@ Route::versioned()->group(function () {
 
         Route::post('/auth/register', RegisterController::class)
             ->name('auth.register');
-
-        Route::resource('audiograms', AudiogramController::class);
     });
 
     Route::middleware('auth:sanctum')->group(function () {
+        Route::resource('audiograms', AudiogramController::class)->only('index', 'store', 'show');
+
         Route::put('profile', [UserController::class, 'update'])->name('profile.update');
     });
 });

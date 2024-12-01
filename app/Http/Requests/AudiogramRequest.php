@@ -24,7 +24,7 @@ class AudiogramRequest extends FormRequest
     {
         return [
             'type' => ['required', 'in:left,right'],
-            'freqs' => ['required', AudiogramFrequenciesRule::class]
+            'freqs' => ['required', 'array', new AudiogramFrequenciesRule()]
         ];
     }
 }

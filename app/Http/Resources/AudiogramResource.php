@@ -17,7 +17,7 @@ class AudiogramResource extends JsonResource
         return [
             'id' => $this->id,
             'type' => $this->type,
-            'frequencies' => $this->frequencies,
+            'frequencies' => $this->freqs,
             'created_at' => $this->created_at->format('Y-m-d g:i'),
             'created_at_formatted' => $this->created_at->diffForHumans(),
         ];

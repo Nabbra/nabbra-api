@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Helpers\UserHelpers;
+use App\Models\Relations\UserRelations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,6 +15,7 @@ class User extends Authenticatable
     use HasFactory;
     use Notifiable;
     use UserHelpers;
+    use UserRelations;
     use HasApiTokens;
 
 
@@ -25,6 +27,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'image',
         'password',
         'email_verified_at',
         'last_activity_at',
