@@ -4,8 +4,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::redirect('/', '/api/health');
-
 // TO BE DONE.
 // Route::get('/', function () {
 //     return Inertia::render('Welcome', [

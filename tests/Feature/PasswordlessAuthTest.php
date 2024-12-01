@@ -23,7 +23,7 @@ class PasswordlessAuthTest extends TestCase
         Notification::fake();
 
         $response = $this->postJson(
-            route('auth.passwordless.token', ['apiVersion' => '1']),
+            route('api.auth.passwordless.token', ['apiVersion' => '1']),
             ['email' => 'abdallah'],
         );
 
@@ -45,7 +45,7 @@ class PasswordlessAuthTest extends TestCase
         $this->assertDatabaseCount('verification_tokens', 0);
 
         $response = $this->postJson(
-            route('auth.passwordless.token', ['apiVersion' => '1']),
+            route('api.auth.passwordless.token', ['apiVersion' => '1']),
             ['email' => $email = 'abdallah.r660@gmail.com'],
         );
 
@@ -76,7 +76,7 @@ class PasswordlessAuthTest extends TestCase
         $this->assertDatabaseCount('users', 0);
 
         $response = $this->postJson(
-            route('auth.passwordless.verify', ['apiVersion' => '1']),
+            route('api.auth.passwordless.verify', ['apiVersion' => '1']),
             ['token' => $token->token],
         );
 
@@ -119,7 +119,7 @@ class PasswordlessAuthTest extends TestCase
         $this->assertDatabaseCount('users', 1);
 
         $response = $this->postJson(
-            route('auth.passwordless.verify', ['apiVersion' => '1']),
+            route('api.auth.passwordless.verify', ['apiVersion' => '1']),
             ['token' => $token->token],
         );
 
@@ -158,7 +158,7 @@ class PasswordlessAuthTest extends TestCase
             ->create(['payload' => base64_encode('email@example.com')]);
 
         $response = $this->postJson(
-            route('auth.passwordless.verify', ['apiVersion' => '1']),
+            route('api.auth.passwordless.verify', ['apiVersion' => '1']),
             ['token' => $token->token],
         );
 
@@ -176,7 +176,7 @@ class PasswordlessAuthTest extends TestCase
     public function test_non_existance_token_return_error(): void
     {
         $response = $this->postJson(
-            route('auth.passwordless.verify', ['apiVersion' => '1']),
+            route('api.auth.passwordless.verify', ['apiVersion' => '1']),
             ['token' => 'mocked-token'],
         );
 

@@ -41,7 +41,7 @@ class Audiogram extends Model
     protected function casts(): array
     {
         return [
-            'freqs' => 'array',
+            'freqs' => 'json',
         ];
     }
 }

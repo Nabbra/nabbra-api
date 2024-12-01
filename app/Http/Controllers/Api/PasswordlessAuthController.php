@@ -9,6 +9,8 @@ use App\Http\Requests\Auth\PasswordlessVerifyRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Models\VerificationToken;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class PasswordlessAuthController extends Controller
@@ -51,6 +53,7 @@ class PasswordlessAuthController extends Controller
                 'name' => env('APP_NAME').' User',
                 'email' => $email = $token->getEmail(),
                 'email_verified_at' => now(),
+                'password' => Hash::make(Str::random()),
                 'image' => 'https://gravatar.com/'.md5($email),
                 'last_activity_at' => now(),
             ]);

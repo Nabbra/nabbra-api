@@ -16,7 +16,7 @@ class UserTest extends TestCase
     public function test_profile_update_validation(): void
     {
         $response = $this->actingAs(User::factory()->createOne())
-            ->putJson(route('profile.update'), [
+            ->putJson(route('api.profile.update'), [
                 'name' => '',
             ]);
 
@@ -29,7 +29,7 @@ class UserTest extends TestCase
     public function test_user_can_update_profile_name(): void
     {
         $response = $this->actingAs($user = User::factory()->createOne())
-            ->putJson(route('profile.update'), [
+            ->putJson(route('api.profile.update'), [
                 'name' => 'Mustafa Mahmoud'
             ]);
 

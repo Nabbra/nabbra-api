@@ -12,7 +12,7 @@ Route::get('/health', function () {
     return ['success' => true, 'timestamp' => now()];
 });
 
-Route::versioned()->group(function () {
+Route::versioned()->name('api.')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::post('/auth/providers/{provider}/callback', SocialAuthController::class)
             ->name('auth.social.callback')
@@ -34,6 +34,7 @@ Route::versioned()->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::resource('audiograms', AudiogramController::class)->only('index', 'store', 'show');
 
+        Route::get('profile', [UserController::class, 'show'])->name('profile.show');
         Route::put('profile', [UserController::class, 'update'])->name('profile.update');
     });
 });

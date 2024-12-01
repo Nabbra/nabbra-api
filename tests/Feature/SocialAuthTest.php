@@ -42,7 +42,7 @@ class SocialAuthTest extends TestCase
     public function test_non_supported_provider_return_error(): void
     {
         $response = $this->postJson(
-            route('auth.social.callback', [
+            route('api.auth.social.callback', [
                 'provider' => 'mocked-provider',
                 'apiVersion' => '1',
             ]),
@@ -62,10 +62,10 @@ class SocialAuthTest extends TestCase
      */
     public function test_social_login_for_existing_user(): void
     {
-        $user = $this->createUser();
+        $this->createUser();
 
         $response = $this->postJson(
-            route('auth.social.callback', [
+            route('api.auth.social.callback', [
                 'provider' => 'google',
                 'apiVersion' => '1',
             ]),
@@ -102,7 +102,7 @@ class SocialAuthTest extends TestCase
     public function test_social_login_for_new_user(): void
     {
         $response = $this->postJson(
-            route('auth.social.callback', [
+            route('api.auth.social.callback', [
                 'provider' => 'google',
                 'apiVersion' => '1',
             ]),
@@ -151,7 +151,7 @@ class SocialAuthTest extends TestCase
         $this->assertNotEquals($accessToken, $this->accessToken);
 
         $response = $this->postJson(
-            route('auth.social.callback', [
+            route('api.auth.social.callback', [
                 'provider' => 'github',
                 'apiVersion' => '1',
             ]),
